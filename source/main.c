@@ -3,6 +3,8 @@
 
 #include <SDL2/SDL.h>
 
+#include "chip8.h"
+
 typedef unsigned char 		u8;
 typedef unsigned short 		u16;
 typedef unsigned int 		u32;
@@ -42,6 +44,10 @@ void DrawFilledRect(int win_width, int win_height, int posx, int posy, int width
 
 int main(int argc, char **argv)
 {
+	chip8_emu emu_state;
+	LoadRomFile(argv[1], &emu_state);
+	
+
 	if(SDL_Init(SDL_INIT_VIDEO) <0) {printf("failed to initlise SDL :["); exit(1);}
 	basic_sdl.window = SDL_CreateWindow("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 512, 256, 0);
 
