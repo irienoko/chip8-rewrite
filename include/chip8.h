@@ -22,5 +22,7 @@ typedef struct
 
 void LoadRomFile(char *filepath, chip8_emu *emu_state);
 
+void ParseOPCodes(chip8_emu *emu_state);
+
 #endif
 

@@ -10,6 +10,15 @@ typedef unsigned short 		u16;
 typedef unsigned int 		u32;
 typedef unsigned long long	u64;
 
+
+//SHIT TODO
+/*
+	parse loaded file for instructions
+	figure out how to do proper timming 
+	figure out how to do sounds
+*/
+
+
 static struct 
 {
 	SDL_Window 	*window;
@@ -72,8 +81,10 @@ int main(int argc, char **argv)
 		{
 			if(e.type == SDL_QUIT) exit(0);
 		}
-
+		
 		SDL_BlitSurface(basic_sdl.canvas, 0, basic_sdl.window_surface, 0);
+
+		ParseOPCodes(&emu_state);
 		SDL_UpdateWindowSurface(basic_sdl.window);
 	}
 
