@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <string.h>
 
 #include "chip8.h"
 
@@ -78,8 +79,8 @@ void ParseOPCodes(chip8_emu *emu_state)
 		{
 			switch(op & 0x0FFF)
 			{
-				case 0x00E0: {printf("clear display \n"); emu_state->PC +=2; } break;
-				case 0x00EE: {printf("return from subroutine \n"); emu_state->PC +=2;} break;
+				case 0x00E0: {printf("clear display \n"); memset(emu_state->display, 0, sizeof(emu_state->display)); emu_state->PC +=2; } break;
+				case 0x00EE: {printf("return from subroutine \n"); emu_state->SP -=2; emu_state->PC = emu_state->stack[emu_state->PC]; emu_state->PC +=2;} break;
 			}
 		}break;
 
@@ -89,11 +90,6 @@ void ParseOPCodes(chip8_emu *emu_state)
 		}break;
 
 		case 0x2000:
-		{
-			
-		}break;
-
-		case 0x3000:
 		{
 			
 		}break;
@@ -152,7 +148,7 @@ void ParseOPCodes(chip8_emu *emu_state)
 					
 				}break;
 
-				case 0x5
+				case 0x5:
 				{
 					
 				}break;
@@ -167,7 +163,7 @@ void ParseOPCodes(chip8_emu *emu_state)
 					
 				}break;
 
-				case 0xE
+				case 0xE:
 				{
 					
 				}break;
@@ -199,11 +195,11 @@ void ParseOPCodes(chip8_emu *emu_state)
 			
 		}break;
 
-		case 0xE000
+		case 0xE000:
 		{
 			switch (op & 0x00FF)
 			{
-				case 0x9E
+				case 0x9E:
 				{
 					
 				}break;
@@ -215,7 +211,7 @@ void ParseOPCodes(chip8_emu *emu_state)
 			}
 		}break;
 
-		case 0xF000
+		case 0xF000:
 		{
 			switch (op & 0x00FF)
 			{
